@@ -778,6 +778,19 @@ body::before {
 const music = document.getElementById('bgMusic');
 music.volume = 0.25;
 
+function fadeVolume(target, duration) {
+  const start = music.volume;
+  const steps = 40;
+  const interval = duration / steps;
+  const delta = (target - start) / steps;
+  let step = 0;
+  const timer = setInterval(() => {
+    step++;
+    music.volume = Math.min(1, Math.max(0, music.volume + delta));
+    if (step >= steps) clearInterval(timer);
+  }, interval);
+}
+
 function start() {
   showPage('page2');
   music.play().catch(() => {});
@@ -854,6 +867,9 @@ function unfoldLetter() {
 
   paper.style.display = 'block';
   paper.classList.add('unfolding');
+
+  // Gently fade music down for quiet reading
+  fadeVolume(0.05, 1500);
 }
 
 function resetRead() {
@@ -870,6 +886,9 @@ function resetRead() {
   document.getElementById('btnOpenLetter').classList.remove('visible');
   document.getElementById('envShell').classList.remove('opened');
   document.getElementById('envHint').style.opacity = '1';
+
+  // Fade music back up
+  fadeVolume(0.25, 1500);
 }
 
 /* ── ANSWERS ── */
