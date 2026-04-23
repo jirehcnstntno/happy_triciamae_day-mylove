@@ -83,6 +83,16 @@ body::before {
   display: inline-block;
   animation: pulse 2s 1.8s ease infinite;
 }
+
+.p1-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(12px, 2.8vw, 15px);
+  color: rgba(255, 220, 185, 0.65);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-top: -6px;
+}
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
 
 .p1-bottom {
@@ -180,7 +190,7 @@ body::before {
   gap: 26px;
   width: 100%;
   max-width: 380px;
-  margin-top: 60px;
+  margin-top: 120px;
 }
 
 /* ── Envelope shell ── */
@@ -436,6 +446,21 @@ body::before {
 }
 @keyframes floatBouquet { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
 
+.gift-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(15px, 3.5vw, 18px);
+  color: rgba(255, 228, 195, 0.88);
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin-top: 14px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+
+.gift-cat {
+  margin-top: 10px;
+}
+
 /* ══════════════════════════════════════
    ANSWER PAGE — AESTHETIC PHOTO GRID
 ══════════════════════════════════════ */
@@ -583,11 +608,11 @@ body::before {
 .result-wrap { display:none; flex-direction:column; align-items:center; gap:16px; animation:fadeUp 0.6s ease both; }
 .result-wrap.show { display:flex; }
 .iloveyou { font-family:'Playfair Display',serif; font-size:clamp(26px,7vw,46px); color:#fff0de; font-style:italic; text-align:center; text-shadow:0 2px 20px rgba(0,0,0,0.55); }
-.result-emoji { font-size:64px; animation:pulse 1.5s ease infinite; }
+.result-emoji { }
 
 .no-result { display:none; flex-direction:column; align-items:center; gap:16px; animation:fadeUp 0.6s ease both; }
 .no-result.show { display:flex; }
-.angry-cat { font-size:72px; animation:shake 0.5s ease infinite; }
+.angry-cat { }
 @keyframes shake { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
 .no-question { font-family:'Playfair Display',serif; font-size:clamp(16px,4vw,22px); color:#fff0de; font-style:italic; text-align:center; text-shadow:0 2px 10px rgba(0,0,0,0.45); }
 
@@ -607,9 +632,16 @@ body::before {
 
 .blush-result { display:none; flex-direction:column; align-items:center; gap:16px; animation:fadeUp 0.6s ease both; }
 .blush-result.show { display:flex; }
-.blush-cat { font-size:72px; animation:bounceIn 0.8s ease both; }
+.blush-cat { }
 @keyframes bounceIn { 0%{transform:scale(0)} 70%{transform:scale(1.2)} 100%{transform:scale(1)} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.gif-cat {
+  width: 130px;
+  border-radius: 16px;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.4));
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -625,6 +657,7 @@ body::before {
   <div class="p1-content">
     <div class="greeting-sub">a little something</div>
     <h1 class="greeting-main">Happy Birthday,<br>Mahal <span class="greeting-heart">♥</span></h1>
+    <div class="p1-date">April 24, 2026</div>
   </div>
   <div class="p1-bottom">
     <p class="dedication">Specially made for Tricia Mae Cabanit</p>
@@ -706,6 +739,8 @@ body::before {
   <div class="blur-overlay"></div>
   <h2 class="gift-title">Flowers for you 🌸</h2>
   <img class="bouquet-img" src="flowerphoto.png" alt="Bouquet">
+  <p class="gift-subtitle">Tulips and lilies for you, mahal</p>
+  <div class="gift-cat"><img class="gif-cat" src="https://media1.tenor.com/m/nisaHYy8yAYAAAAd/besito-catlove.gif" alt="kissing cat"></div>
   <button class="btn-back" onclick="showPage('page2')">← Back</button>
 </div>
 
@@ -747,7 +782,7 @@ body::before {
   </div>
 
   <div id="mainQuestion">
-    <p class="question">Would you like to stay with me forever? 💍</p>
+    <p class="question">Would you like to stay with me forever?</p>
     <div class="yes-no-wrap">
       <button class="btn-yes" onclick="answerYes()">Yes 💖</button>
       <button class="btn-no" onclick="answerNo()">No</button>
@@ -755,22 +790,24 @@ body::before {
   </div>
 
   <div class="result-wrap" id="yesResult">
-    <div class="result-emoji">😻</div>
+    <div class="result-emoji"><img class="gif-cat" src="https://media.tenor.com/lOG0hy6GUgEAAAAj/cat.gif" alt="blushing cat"></div>
     <div class="iloveyou">ILOVEYOUUUUUU ❤️</div>
+    <button class="btn-back" style="margin-top:10px;" onclick="resetAnswer()">← Back</button>
   </div>
 
   <div class="no-result" id="noResult">
-    <div class="angry-cat">😾</div>
+    <div class="angry-cat"><img class="gif-cat" src="https://media1.tenor.com/m/jexT0EwvhtAAAAAd/scoobert-mad-cat.gif" alt="angry cat"></div>
     <p class="no-question">Would you like to stay with me forever?</p>
     <button class="btn-yes-only" onclick="finalYes()">YES, MY LOVE 💖</button>
   </div>
 
   <div class="blush-result" id="blushResult">
-    <div class="blush-cat">😻</div>
+    <div class="blush-cat"><img class="gif-cat" src="https://media.tenor.com/lOG0hy6GUgEAAAAj/cat.gif" alt="blushing cat"></div>
     <div class="iloveyou">ILOVEYOUUUUUU ❤️</div>
+    <button class="btn-back" style="margin-top:10px;" onclick="resetAnswer()">← Back</button>
   </div>
 
-  <button class="btn-back" onclick="resetAnswer(); showPage('page2')">← Back</button>
+  <button class="btn-back" id="answerPageBack" onclick="resetAnswer(); showPage('page2')">← Back</button>
 </div>
 
 <script>
@@ -895,10 +932,12 @@ function resetRead() {
 function answerYes() {
   document.getElementById('mainQuestion').style.display = 'none';
   document.getElementById('yesResult').classList.add('show');
+  document.getElementById('answerPageBack').style.display = 'none';
 }
 function answerNo() {
   document.getElementById('mainQuestion').style.display = 'none';
   document.getElementById('noResult').classList.add('show');
+  document.getElementById('answerPageBack').style.display = 'none';
 }
 function finalYes() {
   document.getElementById('noResult').classList.remove('show');
@@ -909,6 +948,7 @@ function resetAnswer() {
   document.getElementById('yesResult').classList.remove('show');
   document.getElementById('noResult').classList.remove('show');
   document.getElementById('blushResult').classList.remove('show');
+  document.getElementById('answerPageBack').style.display = 'inline-block';
 }
 </script>
 </body>
